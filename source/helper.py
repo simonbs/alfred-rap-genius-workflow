@@ -1,6 +1,8 @@
 from RapGenius import RapGenius
 from Feedback import Feedback
 import string
+import json
+from subprocess import Popen, PIPE
 
 MINIMUM_SEARCH_QUERY_LENGTH = 3
 
@@ -25,6 +27,8 @@ def helper(query = ''):
       return lyrics_info_feedback()
     else:
       return search_by_lyrics(search_query)
+  elif action == 's' or action == 'spotify':
+    return search_spotify()
   else:
     if len(query) < MINIMUM_SEARCH_QUERY_LENGTH:
       return info_feedback()
@@ -39,6 +43,12 @@ def search_by_title(query):
 
 def search_by_lyrics(query):
   return search('lyrics', query)
+
+def search_spotify():
+  song = current_song_spotify()
+  if 'error' in song:
+    return error_feedback(song['error'])
+  return search_by_title(song["song"])
 
 def search(method, query):
   rg = RapGenius()
@@ -72,6 +82,7 @@ def info_feedback():
   append_artists_info(feedback)
   append_titles_info(feedback)
   append_lyrics_info(feedback)
+  append_spotify_info(feedback)
   return feedback
 
 def artists_info_feedback():
@@ -100,3 +111,46 @@ def append_titles_info(feedback):
 def append_lyrics_info(feedback):
   feedback.add_item('Search lyrics', '', '', 'no', 'l ')
   return feedback
+
+def append_spotify_info(feedback):
+  feedback.add_item('Search for current song in Spotify', '', '', 'no', 's')
+  return feedback
+
+def error_feedback(msg):
+  feedback = Feedback()
+  feedback.add_item(msg)
+  return feedback
+
+def current_song_spotify():
+  script = """
+  if application "Spotify" is running then
+    tell application "Spotify"
+      set player_state to player state
+      if player_state is stopped then
+        return "{\\\"error\\\":\\\"Player is stopped\\\"}"
+      else
+        set artist_name to artist of current track
+        set song_name to name of current track
+        set es_song_name to my replace_chars(song_name, "\\\"", "\\\\\\\"")
+        return "{\\\"artist\\\":\\\"" & artist_name & "\\\",\\\"song\\\":\\\"" & es_song_name & "\\\"}"
+      end if
+    end tell
+  else
+    return "{\\\"error\\\":\\\"Spotify is not running\\\"}"
+  end if
+
+  on replace_chars(this_text, search_string, replacement_string)
+	  set AppleScript's text item delimiters to the search_string
+	  set the item_list to every text item of this_text
+	  set AppleScript's text item delimiters to the replacement_string
+	  set this_text to the item_list as string
+	  set AppleScript's text item delimiters to ""
+	  return this_text
+  end replace_chars
+  """
+  return json.loads(run_applescript(script))
+
+def run_applescript(script):
+  p = Popen(['osascript', '-'], stdin=PIPE, stdout=PIPE, stderr=PIPE)
+  stdout, stderr = p.communicate(script)
+  return stdout

@@ -36,7 +36,7 @@
 				<key>argumenttype</key>
 				<integer>1</integer>
 				<key>escaping</key>
-				<integer>0</integer>
+				<integer>126</integer>
 				<key>keyword</key>
 				<string>rg</string>
 				<key>runningsubtext</key>

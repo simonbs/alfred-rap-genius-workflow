@@ -10,6 +10,7 @@ The workflow provides one command that can optionally take a parameter.
 - **rg (query)**, **rg t (query)** and **rg title (query)** Searches by title
 - **rg a (query)** and **rg artist (query)** Searches by artist
 - **rg l (query)** and **rg lyrics (query)** Searches by lyrics
+- **rg s** and **rg spotify** Searches for the song currently playing in Spotify
 
 Selecting a search result will open the lyrics on Rap Genius in your default browser.
 
