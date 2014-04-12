@@ -7,9 +7,9 @@ A workflow for looking up songs on Rap Genius in Alfred 2.0.
 
 The workflow provides one command that can optionally take a parameter.
 
-- **rg (query)** and **rg t|title (query)** Searches by title
-- **rg a|artist** Searches by artist
-- **rg l|lyrics** Searches by lyrics
+- **rg (query)**, **rg t (query)** and **rg title (query)** Searches by title
+- **rg a (query)** and **rg artist (query)** Searches by artist
+- **rg l (query)** and **rg lyrics (query)** Searches by lyrics
 
 Selecting a search result will open the lyrics on Rap Genius in your default browser.
 
