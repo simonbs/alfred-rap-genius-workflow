@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>bundleid</key>
+	<string>dk.simonbs.Alfred.RapGenius</string>
+	<key>category</key>
+	<string>Internet</string>
+	<key>connections</key>
+	<dict>
+		<key>2F751A4D-6D05-4865-B196-4C07BAD88C76</key>
+		<array>
+			<dict>
+				<key>destinationuid</key>
+				<string>DB7E4FD7-F4C4-4AB0-8E09-2E0298E65EEE</string>
+				<key>modifiers</key>
+				<integer>0</integer>
+				<key>modifiersubtext</key>
+				<string></string>
+			</dict>
+		</array>
+	</dict>
+	<key>createdby</key>
+	<string>Simon Støvring (@simonbs)</string>
+	<key>description</key>
+	<string>Look up a song on Rap Genius</string>
+	<key>disabled</key>
+	<false/>
+	<key>name</key>
+	<string>Rap Genius</string>
+	<key>objects</key>
+	<array>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>argumenttype</key>
+				<integer>1</integer>
+				<key>escaping</key>
+				<integer>0</integer>
+				<key>keyword</key>
+				<string>rg</string>
+				<key>runningsubtext</key>
+				<string>Be patient...</string>
+				<key>script</key>
+				<string>from helper import helper
+
+print(helper("{query}"))</string>
+				<key>title</key>
+				<string>Search Rap Genius</string>
+				<key>type</key>
+				<integer>3</integer>
+				<key>withspace</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.input.scriptfilter</string>
+			<key>uid</key>
+			<string>2F751A4D-6D05-4865-B196-4C07BAD88C76</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+		<dict>
+			<key>config</key>
+			<dict>
+				<key>plusspaces</key>
+				<false/>
+				<key>url</key>
+				<string>http://rapgenius.com/songs/{query}</string>
+				<key>utf8</key>
+				<true/>
+			</dict>
+			<key>type</key>
+			<string>alfred.workflow.action.openurl</string>
+			<key>uid</key>
+			<string>DB7E4FD7-F4C4-4AB0-8E09-2E0298E65EEE</string>
+			<key>version</key>
+			<integer>0</integer>
+		</dict>
+	</array>
+	<key>readme</key>
+	<string></string>
+	<key>uidata</key>
+	<dict>
+		<key>2F751A4D-6D05-4865-B196-4C07BAD88C76</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+		<key>DB7E4FD7-F4C4-4AB0-8E09-2E0298E65EEE</key>
+		<dict>
+			<key>ypos</key>
+			<real>10</real>
+		</dict>
+	</dict>
+	<key>webaddress</key>
+	<string>http://simonbs.dk/</string>
+</dict>
+</plist>
